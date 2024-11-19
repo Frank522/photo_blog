@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:14.2-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=mfrank
+      - POSTGRES_DB=blog
+    command: "postgres -c 'max_connections=500'"
+  my-app:
+    build: .
+    environment:
+      DB_HOST: db
+      DB_NAME: blog
+      DB_USERNAME: mfrank
+      DB_PASSWORD: password
+    volumes:
+      - .:/app:cached
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - db
+volumes:
+  postgres_data: {}
+networks:
+  default:
+    name: myapp_default     

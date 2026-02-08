@@ -76,6 +76,8 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
     addressable (2.8.8)
       public_suffix (>= 2.0.2, < 8.0)
+    appenv (1.1.0)
+      activesupport
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.21)
@@ -311,6 +313,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  appenv
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman

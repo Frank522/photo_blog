@@ -7,6 +7,11 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 
 module Blog
+   Env = AppEnv::Environment.new { |env, src|
+    env.admin_user = src.admin_user || "default"
+    env.admin_password = src.admin_password || "default"
+  }
+
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2

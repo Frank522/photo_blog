@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+    before_action :authenticate, only: %i[edit update destroy]
     before_action :set_article, only: %i[ show edit update destroy ]
     def index
         @articles = Article.all
@@ -47,5 +48,12 @@ class ArticlesController < ApplicationController
 
         def article_params
             params.require(:article).permit(:title, :body, :status, :photo)
+        end
+
+        def authenticate
+            authenticate_or_request_with_http_basic do |username, password|
+                # In production, use environment variables for safety!
+                username == Blog::Env.admin_user && password == Blog::Env.admin_password
+            end
         end
 end

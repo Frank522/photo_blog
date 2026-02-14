@@ -1,6 +1,4 @@
 class ArticlesController < ApplicationController
-    before_action :authenticate, only: %i[show create new edit update destroy]
-    before_action :set_article, only: %i[show edit update destroy]
     def index
         @articles = Article.all
     end
